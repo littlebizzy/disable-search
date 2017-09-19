@@ -13,7 +13,7 @@ Completely disables the built-in WordPress search function to prevent snoopers o
 
 == Description ==
 
-> Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
+Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
 
 Disable Search is a simple plugin that disables the search function on a WordPress website for the purpose of preventing snoopers or robots from spying on your content. Specifically, it disables the built-in `/?s=foo` query function that comes with WordPress.
 
@@ -95,6 +95,7 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 == Changelog ==
 
 = 1.0.3 =
+* minor code tweaks
 * rating request
 
 = 1.0.2 =
