@@ -131,7 +131,7 @@ final class DSBSRC_Admin_Notices {
 
 		// Compare timestamp
 		$timestamp = $this->get_dismissed_timestamp('suggestions');
-		if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_suggestions * 86400) ) {
+		if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_suggestions * 86400)) {
 
 			// Check AJAX submit
 			if (defined('DOING_AJAX') && DOING_AJAX) {
@@ -151,12 +151,12 @@ final class DSBSRC_Admin_Notices {
 	 */
 	private function check_rate_us() {
 
-		// Compare timestamp
-		$timestamp = $this->get_dismissed_timestamp('rate_us');
-		if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400) ) {
+		// Check plugin activation timestamp
+		if ((time() - $this->get_activation_timestamp()) > ($this->days_before_display_rate_us * 86400)) {
 
-			// Check plugin activation timestamp
-			if ((time() - $this->get_activation_timestamp()) > ($this->days_before_display_rate_us * 86400)) {
+			// Compare dismissed timestamp
+			$timestamp = $this->get_dismissed_timestamp('rate_us');
+			if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400) ) {
 
 				// Check AJAX submit
 				if (defined('DOING_AJAX') && DOING_AJAX) {
