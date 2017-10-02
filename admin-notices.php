@@ -484,7 +484,7 @@ final class DSBSRC_Admin_Notices {
 
 	jQuery(function($) {
 
-		$(document).on('click', '.<?php echo $this->prefix; ?>-dismiss-suggestions', function() {
+		$(document).on('click', '.<?php echo $this->prefix; ?>-dismiss-suggestions .notice-dismiss', function() {
 			$.post(ajaxurl, {
 				'action' : '<?php echo $this->prefix; ?>_dismiss_suggestions',
 				'nonce'  : $(this).parent().attr('data-nonce')
@@ -508,7 +508,7 @@ final class DSBSRC_Admin_Notices {
 
 	jQuery(function($) {
 
-		$(document).on('click', '.<?php echo $this->prefix; ?>-dismiss-rate-us', function() {
+		$(document).on('click', '.<?php echo $this->prefix; ?>-dismiss-rate-us .notice-dismiss', function() {
 			$.post(ajaxurl, {
 				'action' : '<?php echo $this->prefix; ?>_dismiss_rate_us',
 				'nonce'  : $(this).parent().attr('data-nonce')
