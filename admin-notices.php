@@ -156,7 +156,7 @@ final class DSBSRC_Admin_Notices {
 		if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400) ) {
 
 			// Check plugin activation timestamp
-			if (time() - $this->get_activation_timestamp() > $this->days_before_display_rate_us * 86400) {
+			if ((time() - $this->get_activation_timestamp()) > ($this->days_before_display_rate_us * 86400)) {
 
 				// Check AJAX submit
 				if (defined('DOING_AJAX') && DOING_AJAX) {
