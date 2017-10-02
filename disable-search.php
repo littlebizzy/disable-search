@@ -25,7 +25,7 @@ define('DSBSRC_VERSION', '1.0.3');
 
 // Admin Notices module
 require_once(dirname(__FILE__).'/admin-notices.php');
-DSBSRC_Admin_Notices::instance('dsbsrc');
+DSBSRC_Admin_Notices::instance(__FILE__, 'dsbsrc');
 register_activation_hook(__FILE__, array(DSBSRC_Admin_Notices::instance(), 'activation'));
 register_deactivation_hook(__FILE__, array(DSBSRC_Admin_Notices::instance(), 'deactivation'));
 

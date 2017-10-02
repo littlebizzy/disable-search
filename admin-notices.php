@@ -21,7 +21,7 @@ final class DSBSRC_Admin_Notices {
 	private $days_before_display_rate_us = 3;
 	private $days_dismissing_rate_us = 365;
 	private $rate_us_url = 'https://wordpress.org/plugins/disable-search-littlebizzy/';
-	private $rate_us_message = 'Please support us by rating this plugin with 5 stars on Wordpress.org! <a href="%url%>" target="_blank">Click here to rate us.</a>';
+	private $rate_us_message = 'Please support us by rating this plugin with 5 stars on Wordpress.org! <a href="%url%" target="_blank">Click here to rate us.</a>';
 
 
 
@@ -54,6 +54,7 @@ final class DSBSRC_Admin_Notices {
 	// ---------------------------------------------------------------------------------------------------
 
 
+
 	/**
 	 * Store missing plugins
 	 */
@@ -66,6 +67,13 @@ final class DSBSRC_Admin_Notices {
 	 * Can be changed by the external initialization.
 	 */
 	private $prefix = 'lbladn';
+
+
+
+	/**
+	 * Caller plugin file
+	 */
+	private $plugin_file;
 
 
 
@@ -84,11 +92,11 @@ final class DSBSRC_Admin_Notices {
 	/**
 	 * Create or retrieve instance
 	 */
-	public static function instance($prefix = null) {
+	public static function instance($plugin_file = null, $prefix = null) {
 
 		// Check instance
 		if (!isset(self::$instance))
-			self::$instance = new self($prefix);
+			self::$instance = new self($plugin_file, $prefix);
 
 		// Done
 		return self::$instance;
@@ -99,7 +107,11 @@ final class DSBSRC_Admin_Notices {
 	/**
 	 * Constructor
 	 */
-	private function __construct($prefix = null) {
+	private function __construct($plugin_file = null, $prefix = null) {
+
+		// Plugin file
+		if (isset($plugin_file))
+			$this->plugin_file = $plugin_file;
 
 		// Prefix assignation
 		if (isset($prefix))
@@ -198,7 +210,7 @@ final class DSBSRC_Admin_Notices {
 	 */
 	public function admin_notices_suggestions() {
 
-		$plugin_data = get_plugin_data(DSBSRC_FILE);
+		$plugin_data = get_plugin_data($this->plugin_file);
 
 		?><div class="<?php echo esc_attr($this->prefix); ?>-dismiss-suggestions notice notice-success is-dismissible" data-nonce="<?php echo esc_attr(wp_create_nonce($this->prefix.'-dismiss-suggestions')); ?>">
 
@@ -218,9 +230,9 @@ final class DSBSRC_Admin_Notices {
 	/**
 	 * Rate Us display
 	 */
-	public function display_rate_us_notice() { ?>
+	public function admin_notices_rate_us() { ?>
 		<div class="<?php echo esc_attr($this->prefix); ?>-dismiss-rate-us notice notice-success is-dismissible" data-nonce="<?php echo esc_attr(wp_create_nonce($this->prefix.'-dismiss-rate-us')); ?>">
-			<p><?php echo str_replace('%url', $this->rate_us_url, $this->rate_us_message); ?></p>
+			<p><?php echo str_replace('%url%', $this->rate_us_url, $this->rate_us_message); ?></p>
 		</div>
 	<?php }
 
