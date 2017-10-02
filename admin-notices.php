@@ -92,11 +92,11 @@ final class DSBSRC_Admin_Notices {
 	/**
 	 * Create or retrieve instance
 	 */
-	public static function instance($plugin_file = null, $prefix = null) {
+	public static function instance($plugin_file = null) {
 
 		// Check instance
 		if (!isset(self::$instance))
-			self::$instance = new self($plugin_file, $prefix);
+			self::$instance = new self($plugin_file);
 
 		// Done
 		return self::$instance;
@@ -107,15 +107,14 @@ final class DSBSRC_Admin_Notices {
 	/**
 	 * Constructor
 	 */
-	private function __construct($plugin_file = null, $prefix = null) {
+	private function __construct($plugin_file = null) {
 
-		// Plugin file
-		if (isset($plugin_file))
-			$this->plugin_file = $plugin_file;
+		// Main plugin file
+		$this->plugin_file = isset($plugin_file)? $plugin_file : __FILE__;
 
-		// Prefix assignation
-		if (isset($prefix))
-			$this->prefix = $prefix;
+		// Prefix from the class name
+		$classname = explode('_', __CLASS__);
+		$this->prefix = strtolower($classname[0]);
 
 		// Check notices
 		$this->check_suggestions();
