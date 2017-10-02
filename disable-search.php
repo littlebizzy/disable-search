@@ -15,38 +15,24 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 // Avoid script calls via plugin URL
 if (!function_exists('add_action'))
-die;
+	die;
 
 // This plugin constants
 define('DSBSRC_FILE', __FILE__);
 define('DSBSRC_PATH', dirname(DSBSRC_FILE));
 define('DSBSRC_VERSION', '1.0.3');
 
-/**
-* Adds a timestamp, so we can measure how many days has the plugin been installed.
-*/
-function disable_search_activate() {
-	add_option( 'disable_search_timestamp', time() );
-}
-register_activation_hook( __FILE__, 'disable_search_activate' );
+
+// Admin Notices module
+require_once(dirname(__FILE__).'/admin-notices.php');
+DSBSRC_Admin_Notices::instance('dsbsrc');
+register_activation_hook(__FILE__, array(DSBSRC_Admin_Notices::instance(), 'activation'));
+register_deactivation_hook(__FILE__, array(DSBSRC_Admin_Notices::instance(), 'deactivation'));
+
 
 /**
-* Removes our timestamp.
-**/
-function disable_search_deactivate() {
-	if( get_option( 'disable_search_timestamp' ) )
-	delete_option( 'disable_search_timestamp' );
-	if( get_option( 'dsbsrc_rate_dismissed' ) )
-	delete_option( 'dsbsrc_rate_dismissed' );
-}
-register_deactivation_hook( __FILE__, 'disable_search_deactivate' );
-
-// Quick context check
-if (is_admin()) {
-	require_once(DSBSRC_PATH.'/admin-notices.php');
-	DSBSRC_Admin_Suggestions::instance();
-	return;
-}
+ * Start current plugin
+ */
 
 // WP parse query hook
 add_action('parse_query', 'dsbsrc_parse_query', 0);
