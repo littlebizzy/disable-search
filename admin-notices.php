@@ -20,7 +20,7 @@ final class DSBSRC_Admin_Notices {
 	 */
 	private $days_before_display_rate_us = 3;
 	private $days_dismissing_rate_us = 365;
-	private $rate_us_url = 'https://wordpress.org/plugins/disable-search-littlebizzy/';
+	private $rate_us_url = 'https://wordpress.org/support/plugin/disable-search-littlebizzy/reviews/#new-post';
 	private $rate_us_message = 'Please support us by rating this plugin with 5 stars on Wordpress.org! <a href="%url%" target="_blank">Click here to rate us.</a>';
 
 
