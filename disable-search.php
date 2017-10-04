@@ -22,8 +22,8 @@ if (!function_exists('add_action'))
 // Admin Notices module
 require_once(dirname(__FILE__).'/admin-notices.php');
 DSBSRC_Admin_Notices::instance(__FILE__);
-register_activation_hook(__FILE__, array(DSBSRC_Admin_Notices::instance(), 'activation'));
-register_deactivation_hook(__FILE__, array(DSBSRC_Admin_Notices::instance(), 'deactivation'));
+register_uninstall_hook(__FILE__, array('DSBSRC_Admin_Notices', 'uninstall'));
+
 
 
 /**
