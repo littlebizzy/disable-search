@@ -21,7 +21,7 @@ final class DSBSRC_Admin_Notices {
 	private $days_before_display_rate_us = 3;
 	private $days_dismissing_rate_us = 365;
 	private $rate_us_url = 'https://wordpress.org/plugins/disable-search-littlebizzy/';
-	private $rate_us_message = 'Please support us by rating this plugin with 5 stars on Wordpress.org! <a href="%url%" target="_blank">Click here to rate us.</a>';
+	private $rate_us_message = 'Thanks for using <strong>%plugin%<strong>. Please support our free work by rating this plugin with 5 stars on WordPress.org. <a href="%url%" target="_blank">Click here to rate us.</a>';
 
 
 
@@ -117,8 +117,39 @@ final class DSBSRC_Admin_Notices {
 		$this->prefix = strtolower($classname[0]);
 
 		// Check notices
-		$this->check_suggestions();
-		$this->check_rate_us();
+		if (is_admin()) {
+			$this->check_timestamps();
+			$this->check_suggestions();
+			$this->check_rate_us();
+		}
+	}
+
+
+
+	// Timestamp checks
+	// ---------------------------------------------------------------------------------------------------
+
+
+
+	/**
+	 * Check current timestamps
+	 */
+	private function check_timestamps() {
+
+		// Activation timestamp
+		$timestamp =$this->get_activation_timestamp();
+		if (empty($timestamp))
+			$this->update_activation_timestamp();
+
+		// Suggestions timestamp
+		$timestamp = $this->get_dismissed_timestamp('suggestions');
+		if (empty($timestamp))
+			$this->update_dismissed_timestamp('suggestions');
+
+		// Rate Us timestamp
+		$timestamp = $this->get_dismissed_timestamp('rate_us');
+		if (empty($timestamp))
+			$this->update_dismissed_timestamp('rate_us');
 	}
 
 
@@ -130,7 +161,7 @@ final class DSBSRC_Admin_Notices {
 
 		// Compare timestamp
 		$timestamp = $this->get_dismissed_timestamp('suggestions');
-		if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_suggestions * 86400)) {
+		if (!empty($timestamp) && (time() - $timestamp) > ($this->days_dismissing_suggestions * 86400)) {
 
 			// Check AJAX submit
 			if (defined('DOING_AJAX') && DOING_AJAX) {
@@ -151,11 +182,12 @@ final class DSBSRC_Admin_Notices {
 	private function check_rate_us() {
 
 		// Check plugin activation timestamp
-		if ((time() - $this->get_activation_timestamp()) > ($this->days_before_display_rate_us * 86400)) {
+		$timestamp = $this->get_activation_timestamp();
+		if (!empty($timestamp) && (time() - $timestamp) > ($this->days_before_display_rate_us * 86400)) {
 
 			// Compare dismissed timestamp
 			$timestamp = $this->get_dismissed_timestamp('rate_us');
-			if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400) ) {
+			if (!empty($timestamp) && (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400)) {
 
 				// Check AJAX submit
 				if (defined('DOING_AJAX') && DOING_AJAX) {
@@ -165,36 +197,11 @@ final class DSBSRC_Admin_Notices {
 				} elseif (!in_array(basename($_SERVER['PHP_SELF']), array('plugins.php', 'plugin-install.php', 'update.php'))) {
 
 					// Admin hooks
-					add_action('admin_footer', array(&$this, 'admin_footer_rate_us'));
+					add_action('admin_footer',  array(&$this, 'admin_footer_rate_us'));
 					add_action('admin_notices', array(&$this, 'admin_notices_rate_us'));
 				}
 			}
 		}
-	}
-
-
-
-	// Activation/Deactivation methods
-	// ---------------------------------------------------------------------------------------------------
-
-
-
-	/**
-	 * Plugin activation hook
-	 */
-	public function activation() {
-		$this->update_activation_timestamp();
-	}
-
-
-
-	/**
-	 * Plugin deactivation hook
-	 */
-	public function deactivation() {
-		$this->delete_activation_timestamp();
-		$this->delete_dismissed_timestamp('suggestions');
-		$this->delete_dismissed_timestamp('rate_us');
 	}
 
 
@@ -229,11 +236,16 @@ final class DSBSRC_Admin_Notices {
 	/**
 	 * Rate Us display
 	 */
-	public function admin_notices_rate_us() { ?>
-		<div class="<?php echo esc_attr($this->prefix); ?>-dismiss-rate-us notice notice-success is-dismissible" data-nonce="<?php echo esc_attr(wp_create_nonce($this->prefix.'-dismiss-rate-us')); ?>">
-			<p><?php echo str_replace('%url%', $this->rate_us_url, $this->rate_us_message); ?></p>
-		</div>
-	<?php }
+	public function admin_notices_rate_us() {
+
+		$plugin_data = get_plugin_data($this->plugin_file);
+
+		?><div class="<?php echo esc_attr($this->prefix); ?>-dismiss-rate-us notice notice-success is-dismissible" data-nonce="<?php echo esc_attr(wp_create_nonce($this->prefix.'-dismiss-rate-us')); ?>">
+
+			<p><?php echo str_replace('%url%', $this->rate_us_url, str_replace('%plugin%', $plugin_data['Name'], $this->rate_us_message)); ?></p>
+
+		</div><?php
+	}
 
 
 
@@ -402,6 +414,23 @@ final class DSBSRC_Admin_Notices {
 			// New plugin
 			return admin_url('update.php?action=install-plugin&plugin='.$plugin.'&_wpnonce='.wp_create_nonce('install-plugin_'.$plugin));
 		}
+	}
+
+
+
+	// Plugin related
+	// ---------------------------------------------------------------------------------------------------
+
+
+
+	/**
+	 * Plugin uninstall hook
+	 */
+	public static function uninstall() {
+		$admin_notices = self::instance();
+		$admin_notices->delete_activation_timestamp();
+		$admin_notices->delete_dismissed_timestamp('suggestions');
+		$admin_notices->delete_dismissed_timestamp('rate_us');
 	}
 
 
