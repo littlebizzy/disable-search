@@ -20,8 +20,8 @@ final class DSBSRC_Admin_Notices {
 	 */
 	private $days_before_display_rate_us = 3;
 	private $days_dismissing_rate_us = 365;
-	private $rate_us_url = 'https://wordpress.org/plugins/disable-search-littlebizzy/';
-	private $rate_us_message = 'Thanks for using <strong>%plugin%<strong>. Please support our free work by rating this plugin with 5 stars on WordPress.org. <a href="%url%" target="_blank">Click here to rate us.</a>';
+	private $rate_us_url = 'https://wordpress.org/support/plugin/disable-search-littlebizzy/reviews/#new-post';
+	private $rate_us_message = 'Thanks for using <strong>%plugin%</strong>. Please support our free work by rating this plugin with 5 stars on WordPress.org. <a href="%url%" target="_blank">Click here to rate us.</a>';
 
 
 
@@ -284,7 +284,7 @@ final class DSBSRC_Admin_Notices {
 	 */
 	public function plugins_loaded() {
 
-		// Check missing plugins
+		// Collect missing plugins
 		$this->missing = $this->get_missing_plugins();
 		if (!empty($this->missing) && is_array($this->missing)) {
 			add_action('admin_footer', array(&$this, 'admin_footer_suggestions'));
