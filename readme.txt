@@ -6,8 +6,9 @@ Requires at least: 4.4
 Tested up to: 4.8
 Requires PHP: 7.0
 Stable tag: 1.0.3
-License: GPL3
+License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Prefix: DSBSRC
 
 Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
 
@@ -23,28 +24,6 @@ Unlike other "disable search" plugins, this plugin does not alter the design or 
 
 We decided for initial release not to have a "settings" page or allow any redirects of these search query URLs. Instead, you can pair this plugin perfectly with our other plugin called 404 To Homepage if you wish to redirect these "404 searches" automatically to your homepage.
 
-Compatibility:
-
-* Meant for Linux servers
-* Minimum PHP version: 5.5
-* Designed for: PHP 7+ and MySQL 5.7+
-* Can be used as a "Must Use" plugin (mu-plugins)
-
-Future plugin goals:
-
-* Localization (translation support)
-* Possible "settings" page with options
-* More features (based on user suggestions)
-* Code maintenance/improvements
-
-Code inspired by:
-
-* [Disable Search](https://wordpress.org/plugins/disable-search/)
-
-NOTE: We released this plugin in response to our managed hosting clients asking for better access to their server environment, and our primary goal will likely remain supporting that purpose. Although we are 100% open to fielding requests from the WordPress community, we kindly ask that you consider all of the above mentioned goals before leaving reviews of this plugin, thanks!
-
-Some details about the plugin implementation:
-
 * Test in WP 4.7 with Disable Search only activated:
 
 GET /?s=test HTTP/1.1
@@ -59,7 +38,6 @@ Expires: Wed, 11 Jan 1984 05:00:00 GMT
 Cache-Control: no-cache, must-revalidate, max-age=0
 Link: <http://example.com/wp-json/>; rel="https://api.w.org/"
 
-
 * Test in WP 4.7 with both Disable Search and 404 To Homepage activated:
 
 GET /?s=test HTTP/1.1
@@ -72,17 +50,64 @@ Transfer-Encoding: chunked
 Connection: keep-alive
 Location: http://example.com
 
+#### Compatibility ####
+
+This plugin has been designed for use on LEMP (Nginx) web servers with PHP 7.0+ and MySQL 5.7+ to achieve best performance. All of our plugins are meant for single site WordPress installs only; for performance and security reasons, we highly recommend against using WordPress Multi-Site for the vast majority of projects.
+
+#### Plugin Features ####
+
+* Settings Page: No
+* Upgrade Available: No
+* Includes Media: No
+* Includes CSS: No
+* Database Storage: Yes
+  * Transients: No
+  * Options: Yes
+* Database Queries: Backend only
+* Must-Use Support: Yes
+* Multi-site Support: No
+* Uninstalls Data: Yes
+
+#### Code Inspiration ####
+
+This plugin was partially inspired either in "code or concept" by the open-source software and discussions mentioned below:
+
+* [Disable Search](https://wordpress.org/plugins/disable-search/)
+
+#### Recommended Plugins ####
+
+We invite you to check out a few other related free plugins that our team has also produced that you may find especially useful:
+
+* [Disable Author Pages](https://wordpress.org/plugins/disable-author-pages-littlebizzy/)
+* [Remove Category Base](https://wordpress.org/plugins/remove-category-base-littlebizzy/)
+* [404 To Homepage](https://wordpress.org/plugins/404-to-homepage-littlebizzy/)
+
+#### Special Thanks ####
+
+We thank the following groups for their generous contributions to the WordPress community which have particularly benefited us in developing our own free plugins and paid services:
+
+* [Automattic](https://automattic.com)
+* [Delicious Brains](https://deliciousbrains.com)
+* [Roots](https://roots.io)
+* [rtCamp](https://rtcamp.com)
+* [WP Tavern](https://wptavern.com)
+
+#### Disclaimer ####
+
+We released this plugin in response to our managed hosting clients asking for better access to their server environment, and our primary goal will remain supporting that purpose. Although we are 100% open to fielding requests from the WordPress community, we kindly ask that you consider the above mentioned goals before leaving reviews of this plugin, thanks!
+
 == Installation ==
 
-1. Upload to `/wp-content/plugins/`
-2. Activate via WP Admin >> Plugins menu
-3. Verify search queries "404" by appending `/?s=foo` to your site URL
+1. Upload to `/wp-content/plugins/disable-search-littlebizzy`
+2. Activate via WP Admin > Plugins menu
+3. Verify search queries are "404 error" status by appending `/?s=foo` to site URL
+4. We recommend installing the free 404 To Homepage plugin as well
 
 == FAQ ==
 
 = Does this plugin alter anything related to Appearance? =
 
-No, and it's not meant to. Widgets, Themes, Menus, or otherwise are not altered at all.
+No, and it's not meant to. Search widgets, themes, menus, CSS, or otherwise are not altered whatsoever.
 
 = How can I change this plugin's settings? =
 
@@ -93,6 +118,12 @@ This plugin does not have a settings page and is designed for speed and simplici
 Please avoid leaving negative reviews in order to get a feature implemented. Instead, we kindly ask that you post your feedback on the wordpress.org support forums by tagging this plugin in your post. If needed, you may also contact our homepage.
 
 == Changelog ==
+
+= 1.0.5 =
+* re-fixed rating request
+
+= 1.0.4 =
+* fixed rating request
 
 = 1.0.3 =
 * minor code tweaks
