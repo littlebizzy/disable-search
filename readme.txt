@@ -5,9 +5,10 @@ Tags: disable, search, form, dynamic, database, query, queries, strings
 Requires at least: 4.4
 Tested up to: 4.8
 Requires PHP: 7.0
-Stable tag: 1.0.3
-License: GPL3
+Stable tag: 1.0.4
+License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Prefix: DSBSRC
 
 Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
 
@@ -93,6 +94,9 @@ This plugin does not have a settings page and is designed for speed and simplici
 Please avoid leaving negative reviews in order to get a feature implemented. Instead, we kindly ask that you post your feedback on the wordpress.org support forums by tagging this plugin in your post. If needed, you may also contact our homepage.
 
 == Changelog ==
+
+= 1.0.4 =
+* fixed code tweaks
 
 = 1.0.3 =
 * minor code tweaks
