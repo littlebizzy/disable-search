@@ -151,7 +151,7 @@ final class DSBSRC_Admin_Notices {
 
 		// Compare timestamp
 		$timestamp = $this->get_dismissed_timestamp('suggestions');
-		if (!empty($timestamp) && (time() - $timestamp) > ($this->days_dismissing_suggestions * 86400)) {
+		if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_suggestions * 86400)) {
 
 			// Check AJAX submit
 			if (defined('DOING_AJAX') && DOING_AJAX) {
@@ -177,7 +177,7 @@ final class DSBSRC_Admin_Notices {
 
 			// Compare dismissed timestamp
 			$timestamp = $this->get_dismissed_timestamp('rate_us');
-			if (!empty($timestamp) && (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400)) {
+			if (empty($timestamp) || (time() - $timestamp) > ($this->days_dismissing_rate_us * 86400)) {
 
 				// Check AJAX submit
 				if (defined('DOING_AJAX') && DOING_AJAX) {
