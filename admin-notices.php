@@ -140,16 +140,6 @@ final class DSBSRC_Admin_Notices {
 		$timestamp =$this->get_activation_timestamp();
 		if (empty($timestamp))
 			$this->update_activation_timestamp();
-
-		// Suggestions timestamp
-		$timestamp = $this->get_dismissed_timestamp('suggestions');
-		if (empty($timestamp))
-			$this->update_dismissed_timestamp('suggestions');
-
-		// Rate Us timestamp
-		$timestamp = $this->get_dismissed_timestamp('rate_us');
-		if (empty($timestamp))
-			$this->update_dismissed_timestamp('rate_us');
 	}
 
 
