@@ -132,11 +132,9 @@ final class DSBSRC_Admin_Notices {
 
 
 	/**
-	 * Check current timestamps
+	 * Creates the activation timestamp only if it does not exist
 	 */
 	private function check_timestamps() {
-
-		// Activation timestamp
 		$timestamp =$this->get_activation_timestamp();
 		if (empty($timestamp))
 			$this->update_activation_timestamp();
