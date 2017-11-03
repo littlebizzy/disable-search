@@ -1,11 +1,12 @@
 === Disable Search ===
 
 Contributors: littlebizzy
-Tags: disable, search, form, dynamic, database, query, queries, strings
+Tags: disable, search, form, queries, strings
 Requires at least: 4.4
 Tested up to: 4.8
 Requires PHP: 7.0
-Stable tag: 1.0.6
+Multisite support: No
+Stable tag: 1.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Prefix: DSBSRC
@@ -15,6 +16,12 @@ Completely disables the built-in WordPress search function to prevent snoopers o
 == Description ==
 
 Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
+
+* [Plugin Homepage](https://wordpress.org/plugins/disable-search-littlebizzy/)
+* [Plugin GitHub](https://github.com/littlebizzy/disable-search)
+* [SlickStack.io](https://slickstack.io)
+
+#### The Long Version ####
 
 Disable Search is a simple plugin that disables the search function on a WordPress website for the purpose of preventing snoopers or robots from spying on your content. Specifically, it disables the built-in `/?s=foo` query function that comes with WordPress.
 
@@ -57,16 +64,21 @@ This plugin has been designed for use on LEMP (Nginx) web servers with PHP 7.0 a
 #### Plugin Features ####
 
 * Settings Page: No
-* Upgrade Available: No
-* Includes Media: No
+* Premium Version Available: No
+* Includes Media (Images, Icons, Etc): No
 * Includes CSS: No
 * Database Storage: Yes
   * Transients: No
   * Options: Yes
-* Database Queries: Backend only
-* Must-Use Support: Yes
-* Multi-site Support: No
+  * Creates New Tables: No
+* Database Queries: Backend Only (Options Cache)
+* Must-Use Support: Yes (Use With [Autoloader](https://github.com/littlebizzy/autoloader))
+* Multisite Support: No
 * Uninstalls Data: Yes
+
+#### WP Admin Notices ####
+
+This plugin generates multiple [Admin Notices](https://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices) in the WP Admin dashboard. The first is a notice that fires during plugin activation which recommends several related free plugins that we believe will enhance this plugin's features; this notice will re-appear approximately once every 5 months as our code and recommendations evolve. The second is a notice that fires a few days after plugin activation which asks for a 5-star rating of this plugin on its WordPress.org profile page. This notice will re-appear approximately once every 8 months. These notices can be dismissed by clicking the **(x)** symbol in the upper right of the notice box. These notices may confuse certain users, but are appreciated by the majority of our userbase, who understand that these notices support our free contributions to the WordPress community. If you feel that these notices are too "annoying" than we encourage you to consider one or more of our upcoming premium plugins that combine several free plugin features into a single control panel. Another alternative would be to develop your own plugins for WordPress, if you feel that supporting free plugin authors is not something that interests you.
 
 #### Code Inspiration ####
 
@@ -78,11 +90,16 @@ This plugin was partially inspired either in "code or concept" by the open-sourc
 
 We invite you to check out a few other related free plugins that our team has also produced that you may find especially useful:
 
+* [Force HTTPS](https://wordpress.org/plugins/force-https-littlebizzy/)
 * [Disable Author Pages](https://wordpress.org/plugins/disable-author-pages-littlebizzy/)
+* [Disable Embeds](https://wordpress.org/plugins/disable-embeds-littlebizzy/)
+* [Disable Emojis](https://wordpress.org/plugins/disable-emojis-littlebizzy/)
+* [Disable XML-RPC](https://wordpress.org/plugins/disable-xml-rpc-littlebizzy/)
 * [Remove Category Base](https://wordpress.org/plugins/remove-category-base-littlebizzy/)
 * [Remove Query Strings](https://wordpress.org/plugins/remove-query-strings-littlebizzy/)
 * [404 To Homepage](https://wordpress.org/plugins/404-to-homepage-littlebizzy/)
 * [Server Status](https://wordpress.org/plugins/server-status-littlebizzy/)
+* [Virtual Robots.txt](https://wordpress.org/plugins/virtual-robotstxt-littlebizzy/)
 
 #### Special Thanks ####
 
@@ -120,12 +137,16 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 
 == Changelog ==
 
+= 1.0.7 =
+* optimized plugin code
+* reset admin notices timestamps
+
 = 1.0.6 =
 * optimized admin notices
 * updated recommended plugins
 
 = 1.0.5 =
-* re-fixed rating request
+* fixed rating request (again)
 
 = 1.0.4 =
 * fixed rating request
