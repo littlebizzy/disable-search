@@ -3,7 +3,7 @@
 Contributors: littlebizzy
 Tags: disable, search, form, queries, strings
 Requires at least: 4.4
-Tested up to: 4.8
+Tested up to: 4.9
 Requires PHP: 7.0
 Multisite support: No
 Stable tag: 1.0.8
