@@ -1,6 +1,7 @@
 === Disable Search ===
 
 Contributors: littlebizzy
+Donate link: https://www.patreon.com/littlebizzy
 Tags: disable, search, form, queries, strings
 Requires at least: 4.4
 Tested up to: 4.9
