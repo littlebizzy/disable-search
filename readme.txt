@@ -7,7 +7,7 @@ Requires at least: 4.4
 Tested up to: 4.9
 Requires PHP: 7.0
 Multisite support: No
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Prefix: DSBSRC
@@ -198,6 +198,10 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 
 == Changelog ==
 
+= 1.0.9 =
+* added warning for Multisite installations
+* updated recommended plugins
+
 = 1.0.8 =
 * tested with WP 4.9
 * added support for `define('DISABLE_NAG_NOTICES', true);`
@@ -211,20 +215,20 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 * updated recommended plugins
 
 = 1.0.5 =
-* fixed rating request (again)
+* fixed rating request calculation (again)
 
 = 1.0.4 =
-* fixed rating request
+* fixed rating request calculation
 
 = 1.0.3 =
 * minor code tweaks
-* added rating request
+* added rating request notice
 
 = 1.0.2 =
-* added recommended plugins
+* added recommended plugins notice
 
 = 1.0.1 =
-* tested with WordPress 4.8
+* tested with WP 4.8
 * updated plugin meta
 
 = 1.0.0 =
