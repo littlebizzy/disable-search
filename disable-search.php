@@ -3,7 +3,7 @@
 Plugin Name: Disable Search
 Plugin URI: https://www.littlebizzy.com/plugins/disable-search
 Description: Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
-Version: 1.0.8
+Version: 1.0.9
 Author: LittleBizzy
 Author URI: https://www.littlebizzy.com
 License: GPLv3
@@ -15,6 +15,15 @@ Prefix: DSBSRC
 require_once dirname(__FILE__).'/admin-notices.php';
 DSBSRC_Admin_Notices::instance(__FILE__);
 
+/**
+ * Admin Notices Multisite check
+ * Uncomment //return to disable this plugin on Multisite installs
+ */
+require_once dirname(__FILE__).'/admin-notices-ms.php';
+if (false !== \LittleBizzy\DisableSearch\Admin_Notices_MS::instance(__FILE__)) {
+	//return;
+}
+
 // Block direct calls
 if (!function_exists('add_action'))
 	die;
@@ -22,7 +31,7 @@ if (!function_exists('add_action'))
 // Plugin constants
 define('DSBSRC_FILE', __FILE__);
 define('DSBSRC_PATH', dirname(DSBSRC_FILE));
-define('DSBSRC_VERSION', '1.0.8');
+define('DSBSRC_VERSION', '1.0.9');
 
 
 
