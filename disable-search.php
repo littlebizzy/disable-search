@@ -3,7 +3,7 @@
 Plugin Name: Disable Search
 Plugin URI: https://www.littlebizzy.com/plugins/disable-search
 Description: Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
-Version: 1.0.9
+Version: 1.0.10
 Author: LittleBizzy
 Author URI: https://www.littlebizzy.com
 License: GPLv3
@@ -31,7 +31,7 @@ if (!function_exists('add_action'))
 // Plugin constants
 define('DSBSRC_FILE', __FILE__);
 define('DSBSRC_PATH', dirname(DSBSRC_FILE));
-define('DSBSRC_VERSION', '1.0.9');
+define('DSBSRC_VERSION', '1.0.10');
 
 
 
