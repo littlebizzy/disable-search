@@ -13,6 +13,7 @@ Completely disables the built-in WordPress search function to prevent snoopers o
     define('DISABLE_NAG_NOTICES', true); // default = true
     
     /* Disable Search Functions */
+    define('DISABLE_SEARCH', true); // default = true
 
 ### Compatibility
 
