@@ -2,7 +2,7 @@
 
 Completely disables the built-in WordPress search function to prevent snoopers or bots from querying your database or slowing down your website.
 
-* [Plugin Homepage](https://www.littlebizzy.com/plugins/force-https)
+* [Plugin Homepage](https://www.littlebizzy.com/plugins/disable-search)
 * [Download Latest Version (ZIP)](https://github.com/littlebizzy/disable-search/archive/1.1.0.zip)
 * [**Become A LittleBizzy.com Member Today!**](https://www.littlebizzy.com/members)
 
