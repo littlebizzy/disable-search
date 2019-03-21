@@ -1,7 +1,7 @@
 <?php
 
 // Subpackage namespace
-namespace LittleBizzy\DisableSearch\Gutenberg;
+namespace LittleBizzy\DisableSearch\Search;
 
 /**
  * Disabler class
