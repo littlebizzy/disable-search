@@ -16,7 +16,7 @@ class Disabler {
 	/**
 	 * Alter main query
 	 */
-	public static function set404(&$wp_query) {
+	public function set404(&$wp_query) {
 
 		// Destroy buffer
 		@ob_clean();
