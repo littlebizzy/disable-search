@@ -23,6 +23,9 @@ final class Core extends Helpers\Singleton {
 
 		// Parse query hook
 		add_action('parse_query', [$this, 'parseQuery'], 0);
+
+		// Before to load first template
+		add_action('template_redirect', [$this, 'removeAdminTopSearch'], PHP_INT_MAX);
 	}
 
 
@@ -42,6 +45,22 @@ final class Core extends Helpers\Singleton {
 			$factory = new Factory($this->plugin);
 			$factory->disabler()->set404($wp_query);
 		}
+	}
+
+
+
+	/**
+	 * Remove top admin bar search
+	 */
+	public function removeAdminTopSearch() {
+
+		// Last minute check
+		if (!$this->plugin->enabled('DISABLE_SEARCH')) {
+			return;
+		}
+
+		// Remove WP hook handler
+		remove_action('admin_bar_menu', 'wp_admin_bar_search_menu', 4);
 	}
 
 
