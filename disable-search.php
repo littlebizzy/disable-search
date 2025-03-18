@@ -41,7 +41,7 @@ add_action( 'parse_query', 'disable_search_query' );
 // disable search in rest api
 function disable_search_rest_api( $result, $server, $request ) {
     if ( $request->get_route() === '/wp/v2/search' ) {
-        return new WP_Error( 'rest_no_route', __( 'Search is disabled.' ), array( 'status' => 404 ) );
+        return new WP_Error( 'rest_no_route', __( 'Search is disabled.', 'disable-search' ), array( 'status' => 404 ) );
     }
     return $result;
 }
