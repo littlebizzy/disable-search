@@ -39,13 +39,13 @@ function disable_search_query( $query ) {
 add_action( 'parse_query', 'disable_search_query' );
 
 // disable search in rest api
-function disable_search_rest_api( $response, $handler, $request ) {
-    if ( isset( $request['search'] ) ) {
+function disable_search_rest_api( $result, $server, $request ) {
+    if ( $request->get_route() === '/wp/v2/search' ) {
         return new WP_Error( 'rest_no_route', __( 'Search is disabled.' ), array( 'status' => 404 ) );
     }
-    return $response;
+    return $result;
 }
-add_filter( 'rest_request_before_callbacks', 'disable_search_rest_api', 10, 3 );
+add_filter( 'rest_pre_dispatch', 'disable_search_rest_api', 10, 3 );
 
 // remove search form
 function disable_search_form( $form ) {
