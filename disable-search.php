@@ -28,32 +28,41 @@ add_filter( 'gu_override_dot_org', function( $overrides ) {
 }, 999 );
 
 // disable search queries
-function disable_search_query($query) {
-    if (!is_admin() && $query->is_search) {
+function disable_search_query( $query ) {
+    if ( ! is_admin() && $query->is_search ) {
         $query->is_search = false;
         $query->set_404();
-        status_header(404);
+        status_header( 404 );
         nocache_headers();
     }
 }
-add_action('parse_query', 'disable_search_query');
+add_action( 'parse_query', 'disable_search_query' );
+
+// disable search in rest api
+function disable_search_rest_api( $response, $handler, $request ) {
+    if ( isset( $request['search'] ) ) {
+        return new WP_Error( 'rest_no_route', __( 'Search is disabled.' ), array( 'status' => 404 ) );
+    }
+    return $response;
+}
+add_filter( 'rest_request_before_callbacks', 'disable_search_rest_api', 10, 3 );
 
 // remove search form
-function disable_search_form($form) {
+function disable_search_form( $form ) {
     return '';
 }
-add_filter('get_search_form', 'disable_search_form');
+add_filter( 'get_search_form', 'disable_search_form' );
 
 // disable search widget
 function disable_search_widget() {
-    unregister_widget('WP_Widget_Search');
+    unregister_widget( 'WP_Widget_Search' );
 }
-add_action('widgets_init', 'disable_search_widget');
+add_action( 'widgets_init', 'disable_search_widget' );
 
 // remove search from admin bar
-function disable_search_admin_bar($wp_admin_bar) {
-    $wp_admin_bar->remove_node('search');
+function disable_search_admin_bar( $wp_admin_bar ) {
+    $wp_admin_bar->remove_node( 'search' );
 }
-add_action('admin_bar_menu', 'disable_search_admin_bar', 999);
+add_action( 'admin_bar_menu', 'disable_search_admin_bar', 999 );
 
 // Ref: ChatGPT
