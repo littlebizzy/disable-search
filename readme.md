@@ -5,7 +5,11 @@ Entirely disables WordPress search
 ## Changelog
 
 ### 2.0.0
-- 
+
+### 1.2.0
+- PBP v1.2.0
+- removed search icon/input field in the top right corner of WP Admin Toolbar on frontend
+- defined constant: `DISABLE_SEARCH`
 
 ### 1.1.0
 - tested with WP 5.0
