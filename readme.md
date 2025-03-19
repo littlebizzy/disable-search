@@ -13,6 +13,7 @@ Totally disables WordPress search
 - `Tested up to` bumped from 5.0 to 6.7
 - `Requires PHP` lowered from 7.2 to 7.0
 - removed `WC` headers for WooCommerce (for now)
+- added support for Git Updater
 
 ### 1.2.0
 - PBP v1.2.0
