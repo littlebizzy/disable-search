@@ -1,10 +1,18 @@
 # Disable Search
 
-Entirely disables WordPress search
+Totally disables WordPress search
 
 ## Changelog
 
 ### 2.0.0
+- completely refactored to follow WordPress standards
+- improved search query blocking via `parse_query` hook
+- blocks searches attempted via REST API
+- added `Update URI` plugin header
+- added `Text Domain` plugin header
+- `Tested up to` bumped from 5.0 to 6.7
+- `Requires PHP` lowered from 7.2 to 7.0
+- removed `WC` headers for WooCommerce (for now)
 
 ### 1.2.0
 - PBP v1.2.0
